@@ -1,5 +1,5 @@
-#this was the inital test of running the assignment without listening to the lecture on Thrusday!!
 #Assignment 1 Bonus | Taking the value of number & square value of number & dividing them again
+
 import math
 number = int(input("Please enter the product "))
 n = int(input("Please enter the base "))
