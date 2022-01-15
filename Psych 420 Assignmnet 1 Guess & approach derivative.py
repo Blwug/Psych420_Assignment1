@@ -18,7 +18,8 @@ editedguess = guess
 #the diffference between their guess to how far they were from the actual value
 
 while editedguess <= actualanswer:
-    #this is a while loop & continues until the condition of edited guess being less than or equal to actual answer is false
+    #the function continues until the edited guess is equal to the actual answer
+
 
     print (editedguess)
     #this has the terminal print the value of the guess being modified to approach the actualansqwer variable
@@ -36,7 +37,3 @@ diff = editedguess - guess
 
 print("your guess was "+str (diff) + " off")
 
-#another thing to note is that we are taking the value from the 16th decimal place so the results is more accurate
-# regarding how much the user is off; if there is to much strain running it,
-# then reduce it yourself by setting a limit on the number or something
-#this uses the same amount of ram as google for me: 1.4 gb.
