@@ -1,3 +1,4 @@
+#this was the example given in the study.
 import matplotlib.pyplot as plt
 import numpy as np
 a = np.linspace(-4,6,num=120)
