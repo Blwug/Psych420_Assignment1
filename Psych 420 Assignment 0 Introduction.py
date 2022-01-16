@@ -5,16 +5,17 @@
 #4. We will be square rooting a valid number
 import math
 
-number = int(input("Please enter a number you would like to square root and rounded to the nearest whole number"))
-number = math.sqrt(number)
-#we are squaring the value we got from the user
-number = (math.floor(number))
-#we are rounding the number down to whole number
+#taking the deraitive of a function
 
-print("the square root of the number is " + str(number))
+x = 0.5385
+firstx = x**2
+firstxi = 3*firstx
+secondx = 8*x
+
+result = firstx - secondx
 
 
-
+print(result)
 
 
 
