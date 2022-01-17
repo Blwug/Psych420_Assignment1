@@ -1,18 +1,25 @@
-def newtonsmethod (function, derivativefunction, guess, threshold, iteration):
+import math
 
-    #function represents the formula used (numrator)
-    #derivative function represents the derivative of the function (denominator)
-    #guess is the users initial guess
-    #threshold represents the amount that the initial guess can approach before the program stops
+def functionOriginal(x):
+    f = 3*x**2 - 16
+    return f
 
+def functionDerived(x):
+    f_d = 6*x
+    return f_d
 
+def runMethod (x_0):
+    iteration = 1
+    while True:
+        f = functionOriginal(x_0)
+        f_d = functionDerived(x_0)
+        x_next = x_0 - (f/f_d)
 
+        print ("x_{} = {}".format(iteration, x_next))
+        if iteration == 5:
+            break
+        x_0 = x_next
+        iteration = iteration +1
 
+runMethod(10)
 
-
-
-#some things that I tried towards making the code was trying the following:
-    #using an eval function, however, that is bad coding practice
-    #using a def f(x): return (x**3) - this works && yields the same results as
-    #using f = lambda x: x**3 i still don't know the instance why you would use one
-    #over the other
