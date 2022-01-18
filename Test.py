@@ -1,32 +1,46 @@
 import math
 
 def functionOriginal(x):
-    f = 3*x**2 - 16
+    f = x**1/4
     return f
 
 def functionDerived(x):
-    f_d = 6*x
+    f_d = 4*x**3
     return f_d
-
-def runMethod (x_0):
+#used the power rule
+def originalvalue (x_0):
     iteration = 1
     while True:
         f = functionOriginal(x_0)
         f_d = functionDerived(x_0)
-        x_next = x_0 - (f/f_d)
+        #defining the function allows x to be x_0 within the equation
 
+        x_next = x_0 - (f/f_d)
         print ("x_{} = {}".format(iteration, x_next))
-        if iteration == 5:
-            break
         x_0 = x_next
+        # this is the update method, the initial value of x0 gets updated to be x_next
+        # x_next uses newton formula of xn+1 = xn -f(xn)/f`(xn)
+
         iteration = iteration +1
 
-runMethod(10)
+        if iteration == 10:
+            #breaks after n number of the loop running
+            break
+
+originalvalue(3)
+
+    #this represents what we think the
+    #the update method helps keep track towards how many times the iteration occured
+
+
 
 
 
 
 #Comments
+#the profs update method of creating a new guess within 15 characters
+#being of that of real numbers is intresting
+
 #using an eval function, however, that is bad coding practice
     #using a def f(x): return (x**3) - this works && yields the same results as
     #using f = lambda x: x**3 i still don't know the instance why you would use one
@@ -54,5 +68,4 @@ runMethod(10)
 #if f(c) is close to 0, then we accept c - if f(c) = 0 then there's a solution 10**-20 then done
 #else if f(a) * f(c)> then a= c else if f(b)* f(c) >0 then b = c && just keep repeaitng to have it get to a closer solution
 #we'll use the fibonacci series equation of x^2 - x - 1 = 0
-# golden ratio = 1+ square root 5/2
-#f(x) = 0
+
