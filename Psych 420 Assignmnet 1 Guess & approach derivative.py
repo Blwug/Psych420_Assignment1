@@ -7,7 +7,7 @@ def functionOriginal(x):
 def functionDerived(x):
     return (4 * x ** 3)
 
-const_tol = .01
+const_tol = .001
 
 
 # used the power rule
@@ -15,8 +15,8 @@ const_tol = .01
 # Use variable (and function) names that make sense and communicate something
 def originalvalue(goal, guess):
     iteration = 1
-    while True:
 
+    while True:
         f = functionOriginal(guess)
         f_d = functionDerived(guess)
 
@@ -25,8 +25,13 @@ def originalvalue(goal, guess):
         guess = error + guess
 
         iteration = iteration + 1
-        if guess - error/error < const_tol:
+        if (guess - error) <const_tol:
             break
+        else:
+            if iteration == 10:
+                break
+
+
 
 
 
