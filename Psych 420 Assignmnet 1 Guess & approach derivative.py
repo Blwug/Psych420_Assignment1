@@ -23,16 +23,15 @@ def originalvalue(goal, guess):
         error = (goal - f) / f_d
         print("x_{} = {}".format(iteration, guess))
         guess = error + guess
+        iteration = iteration +1
 
-        iteration = iteration + 1
-        if (guess - error) <const_tol:
+        if guess/- error < const_tol:
+            print("max iteration performed before we get the same repeating number")
             break
-        else:
-            if iteration == 10:
-                break
+       # if iteration == 30:
+            #break
 
+originalvalue(16, 5000000)
+#goal is 16 and the guess is  5000000
+#takes 57 iteration to get the answer of the fourth root of the goal: 2.
 
-
-
-
-originalvalue(16, 2.3)
