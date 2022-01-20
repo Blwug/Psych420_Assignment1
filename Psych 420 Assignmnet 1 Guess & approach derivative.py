@@ -10,9 +10,7 @@ def functionDerived(x):
 const_tol = .001
 
 
-# used the power rule
-# You need both a goal and an initial guess
-# Use variable (and function) names that make sense and communicate something
+
 def originalvalue(goal, guess):
 
 
@@ -37,11 +35,9 @@ def originalvalue(goal, guess):
 
 #goal = float(input("goal "))
 #guess = float(input("guess "))
+#running line 36 and line 37 returns nothing; however line 40 solves for any nth root, goal, given any initial guess of the root.
 
-#originalvalue(goal,guess)
 originalvalue(800,55)
-
-
 
 
 #goal is 16 and the guess is  5000000
