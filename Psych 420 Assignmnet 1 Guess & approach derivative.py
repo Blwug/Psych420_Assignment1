@@ -3,16 +3,12 @@ import math
 def functionOriginal(x):
     return (x ** 4)
 
-
 def functionDerived(x):
     return (4 * x ** 3)
 
 const_tol = .001
 
-
-
 def originalvalue(goal, guess):
-
 
     iteration = 1
 
@@ -37,9 +33,6 @@ def originalvalue(goal, guess):
 #guess = float(input("guess "))
 #running line 36 and line 37 returns nothing; however line 40 solves for any nth root, goal, given any initial guess of the root.
 
-originalvalue(800,55)
+originalvalue(16,5)
 
-
-#goal is 16 and the guess is  5000000
-#takes 57 iteration to get the answer of the fourth root of the goal: 2.
 
