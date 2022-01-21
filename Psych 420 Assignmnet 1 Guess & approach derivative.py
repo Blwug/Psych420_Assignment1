@@ -25,7 +25,7 @@ def originalvalue(goal, x0, n):
 
         x1 = (goal - f) / f_d
 
-        #the formula xn+1 based on the Newton's Raphson method.
+        #the formula, xn+1, is based on the Newton's Raphson method.
 
         print("x_{} = {}".format(iteration, x0))
         x0 = x1 + x0
