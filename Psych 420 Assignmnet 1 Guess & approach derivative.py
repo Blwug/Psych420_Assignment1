@@ -12,11 +12,14 @@ def dfunc(x):
 const_tol = .001
 #tolerence
 
-def originalvalue(goal, x0, n):
+def iterative_loop(goal, x0, n):
+
+#iterative_loop = the formula used towards approximating nth root of the goal
 #x0 = initial guess from the user
 #goal  = the number we are trying to find the root for
 #n = nth root of the goal
     #goal^1/n
+
     iteration = 1
 
     while True:
@@ -49,7 +52,7 @@ x0 = float(input("please enter your guess "))
 
 n = float(input("please enter the root you are trying to find "))
 
-originalvalue(goal, x0, n)
+iterative_loop(goal, x0, n)
 
 #if goal =16, guess= 5, n = 4, then x_6 = ~~2.0033
 
