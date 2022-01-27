@@ -2,18 +2,19 @@ import math
 import matplotlib.pyplot as plt
 
 def update_accelerations(positions, accelerations, constant_spring):
-    a1 = float(input(spring_constant * positions))
+    a1 = -1 * positions[-1] * spring_constant
     a1 = accelerations.append(a1)
-
+# [-1] gets the last element
 
 def update_velocity(speeds, accelerations , delta_t ):
-    v1 = float(input(speeds + accelerations * delta_t))
+    v1 = speeds [-1] + accelerations [-1] * delta_t
     speeds.append(v1)
 
 def update_positions(positions, speeds, delta_t):
-
-    p1 = float(((-1) * positions) * speeds * delta_t)
+    p1 = positions[-1] + speeds [-1] * delta_t
     speeds.append(p1)
+#by having the positions and speed getting the last element, if the values trying to find
+#p3 then it'll look at the previous element, p2 to calcuate the new value of p3
 
 def update_times(times, current_time):
 
@@ -54,6 +55,7 @@ for current_time in range (run_time):
     update_velocity(speeds, accelerations, delta_t)
 
     update_positions(positions, speeds, delta_t)
+
 
 print (measurement_time)
 print (positions)
