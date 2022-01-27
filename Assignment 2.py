@@ -30,15 +30,15 @@ speeds = [0]
 #each new iterations is denoted by a new time value
 
 accelerations = []
-run_time = 20.0 #seconds
+run_time = 20 #seconds
 
 update_accelerations(positions, accelerations, spring_constant)
 #updates the update_accelerations method given the previously formula, def, previously used
 
 current_time = 0
 for current_time in range (run_time):
-
-    current_time = sum(float(run_time))
+    current_time += run_time
+    #current_time = sum(run_time)
    # current_time += delta_t
 
 
