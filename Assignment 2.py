@@ -1,38 +1,60 @@
 import math
 import matplotlib.pyplot as plt
 
-def s_t(d_t, v, s):
-    return v +d_t*speed
-
-#s_of_t
-
-def v_t(d_t,a,v):
-    return v + a*d_t
-
-#print v_t(3,2,2)
-
-def a_t(p,s):
-    return -1*p*s
-#print a_t(3,1)
-
-v = 0
-s = 10
-p = 2
-d_t = .5
-t = 0
-i = 0
+def update_accelerations(positions, accelerations, constant_spring):
+    a1 = spring_constant * positions
+    a1 = accelerations.append(a1)
 
 
+def update_velocity(speeds, accelerations , delta_t ):
+    v1 = speeds + accelerations * delta_t
+    speeds.append(v1)
+
+def update_positions(positions, speeds, delta_t):
+
+    p1 = ((-1) * positions) * speeds * delta_t
+    speeds.append(p1)
+
+def update_times(times, current_time):
+
+    times.append(current_time)
+
+delta_t = [0.1]
+spring_constant = 3
+#[] makes it a list, despite delta_t being a static number, it gives us an error for the previous def f(x) if [] is left out
+
+measurement_time = [0]
+positions = [-10]
+speeds = [0]
+#these are the initial values and appending said values previously allows the value to be updated after each iterations
+#each new iterations is denoted by a new time value
+
+accelerations = []
+run_time = 20.0 #seconds
+
+update_accelerations(positions, accelerations, spring_constant)
+#updates the update_accelerations method given the previously formula, def, previously used
+
+current_time = 0
+for current_time in range (run_time):
+
+    current_time = sum(float(run_time))
+   # current_time += delta_t
 
 
-#def release_spring(s_t,v_t,a_t):
-    #while i <10:
+    update_times(measurement_time, current_time)
+    #adding new values to the given list for def (update_times)
 
+    update_accelerations(positions, accelerations, spring_constant)
 
-        #a = a_t(p*s)
-        #v = v_t(d_t + a*d_t)
-        #s = s_t(d_t + v_t*s_t)
-print (a_list)
+    update_velocity(speeds, accelerations, delta_t)
+
+    update_positions(positions, speeds, delta_t)
+
+print (measurement_time)
+print (positions)
+print(speeds)
+print(accelerations)
 
 
 
