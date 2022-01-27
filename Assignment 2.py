@@ -2,17 +2,17 @@ import math
 import matplotlib.pyplot as plt
 
 def update_accelerations(positions, accelerations, constant_spring):
-    a1 = spring_constant * positions
+    a1 = float(input(spring_constant * positions))
     a1 = accelerations.append(a1)
 
 
 def update_velocity(speeds, accelerations , delta_t ):
-    v1 = speeds + accelerations * delta_t
+    v1 = float(input(speeds + accelerations * delta_t))
     speeds.append(v1)
 
 def update_positions(positions, speeds, delta_t):
 
-    p1 = ((-1) * positions) * speeds * delta_t
+    p1 = float(((-1) * positions) * speeds * delta_t)
     speeds.append(p1)
 
 def update_times(times, current_time):
@@ -23,13 +23,13 @@ delta_t = 0.1
 spring_constant = 3
 #[] makes it a list, despite delta_t being a static number, it gives us an error for the previous def f(x) if [] is left out
 
-#measurement_time = [0]
-#positions = [-10]
-#speeds = [0]
+measurement_time = [0]
+positions = [-10]
+speeds = [0]
 
-measurement_time = 0
-positions = -10
-speeds = 0
+#measurement_time = 0
+#positions = -10
+#speeds = 0
 
 
 
