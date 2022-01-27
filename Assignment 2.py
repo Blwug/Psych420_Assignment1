@@ -19,15 +19,19 @@ def update_times(times, current_time):
 
     times.append(current_time)
 
-delta_t = [0.1]
+delta_t = 0.1
 spring_constant = 3
 #[] makes it a list, despite delta_t being a static number, it gives us an error for the previous def f(x) if [] is left out
 
-measurement_time = [0]
-positions = [-10]
-speeds = [0]
-#these are the initial values and appending said values previously allows the value to be updated after each iterations
-#each new iterations is denoted by a new time value
+#measurement_time = [0]
+#positions = [-10]
+#speeds = [0]
+
+measurement_time = 0
+positions = -10
+speeds = 0
+
+
 
 accelerations = []
 run_time = 20 #seconds
