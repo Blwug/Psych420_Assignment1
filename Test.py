@@ -53,3 +53,18 @@ while current_time < run_time:
 print(measurement_times)
 print(positions)
 print(speeds)
+print(accelerations)
+
+fig, axs = plt.subplots(3, 1, figsize=(12, 10))  # 3 rows, 1 column
+axs[0].plot(measurement_times, positions, '-o')
+axs[0].set_title("Position")
+
+axs[1].plot(measurement_times, speeds)
+axs[1].set_title("Velocity")
+
+axs[2].plot(measurement_times, accelerations)
+axs[2].set_title("Acceleration")
+
+fig.suptitle('Oscillator Without Dampening')
+
+plt.show()
