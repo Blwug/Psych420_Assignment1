@@ -1,6 +1,6 @@
 def inertia (I_R, I_C):
     I = I_R + I_C
-
+    #I represents current
 def xx (I_R, C, d_v, d_t):
     diff_I = I_R + C/(d_v*d_t)
 
@@ -33,9 +33,9 @@ aT = a1
 dt = .05
 #represents the amount of time increments increase of every iteration
 max_t = 10
-#
 start_time = 1
 stop_time = 6
+#start and stop time represents the duration for the program to run
 
 cap = 1
 #capacitor
@@ -56,10 +56,8 @@ injection_current = 4.3
 negative_one = -1
 one = 1
 
-I = res + cap
-
+#I = res + cap
 #constant values
-
 
 tau = res*cap
 
@@ -84,8 +82,6 @@ while start_time >= stop_time:
 
     #we can do that by having an update method within this while loop
     #so that every iteration helps us get this new value
-
-
 
 
 
