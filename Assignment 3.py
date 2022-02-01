@@ -1,13 +1,34 @@
-#I = I_R + I_C
-#diff_I = I_R + C/(d_v*d_t)
-#(V/R) + C(d_v*d_t)
-#RI = RC/(d_v/d_t)
-#(1/tau) * (RI - V)
-#(d_v/d_t)
-#1* (1/tau)* (RI-V)
-#d_v/d_t
+def inertia (I_R, I_C):
+    I = I_R + I_C
 
-#LandF equation
+def xx (I_R, C, d_v, d_t):
+    diff_I = I_R + C/(d_v*d_t)
+
+def resistence (voltage, I):
+    R = voltage/I
+
+#def voltage (I, R):
+  #voltage = I *R
+    #Finding the value of voltage, I, or R can be done through
+    # algebra manipulation
+
+
+def resistor_inductor_circuit (V, R_C, d_v, d_t):
+    R1 = V + R_C*(d_v/d_t)
+
+def dv_dt (one, tau, RI, V):
+    a1 = (one/tau) * (RI - V)
+
+    # a1 = dv/dt
+    #the formula represents dv/dt = [-v(t) + R*I(t)](1/t)]
+    #local values means their initial value
+
+aT = a1
+    #dv is difference in vel
+    #dt i sdifference in time
+    #aT represents acceleration being impacted by the time value
+
+
 
 dt = .05
 #represents the amount of time increments increase of every iteration
@@ -20,6 +41,7 @@ cap = 1
 #capacitor
 res = 2
 #resistor
+    #R = Resistence
 threshold = 3
 #if it reaches the threshold then the voltage spikes to the max, 8
 spike_display = 8
@@ -34,12 +56,10 @@ injection_current = 4.3
 negative_one = -1
 one = 1
 
+I = res + cap
+
 #constant values
 
-voltage = init_v
-
-injection_time = start_time * stop_time
-#injection_time represents
 
 tau = res*cap
 
@@ -49,27 +69,26 @@ tau = res*cap
 #might not need to write a function for this
 
 
-def updatetime (initial_time, rate_of_change, time_step):
-
-    t1 =((rate_of_change *time_step) + initial_time)
-    #t1 is the updated time method, t0 is the initial time value
-
-def updateacceleration (localres, locali, localv, tau):
-    #we need to add our own variables for this but we did not define I yet
-    #borrowing the varable the prof used as the name to act as a placeholder
-
-    aT = (negative_one *localv +(localres *locali))*(one/tau)
-    # aT = dv/dt
-    #the formula represents dv/dt = [-v(t) + R*I(t)](1/t)]
-        #local values means their initial value
-
 while start_time >= stop_time:
-    start_time +=  dt
+    init_t += dt
     #this updates the initial value of time by the amount of delta time (0.5)
     #for every iteration of the new time value, we need to know the
     #resistence and the voltage value to get the new aT(dv/dt)
     #we can set a def updatevoltage(_,_,_), and def updatetime(_,_,_)
     #to get the new updated value
+
+    #to do that we need to call on our def functions && append it
+    #so that we can get that value again
+    # if we are appending, then we need to use [] to make the variables a list
+        #however, we do not do this for the constant variables
+
+    #we can do that by having an update method within this while loop
+    #so that every iteration helps us get this new value
+
+
+
+
+
 
 
 #def run_integrate_fire
