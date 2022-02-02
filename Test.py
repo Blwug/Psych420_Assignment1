@@ -24,3 +24,13 @@
     #the check statement will be that when time == stop_time: break
 #create a graph that shows the voltage increase from every cycle
 
+# we can set a def updatevoltage(_,_,_), and def updatetime(_,_,_)
+# to get the new updated value
+
+# to do that we need to call on our def functions && append it
+# so that we can get that value again
+# if we are appending, then we need to use [] to make the variables a list
+# however, we do not do this for the constant variables
+
+# we can do that by having an update method within this while loop
+# so that every iteration helps us get this new value
