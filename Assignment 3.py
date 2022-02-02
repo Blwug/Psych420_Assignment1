@@ -1,74 +1,69 @@
-def inertia (I_R, I_C):
-    I = I_R + I_C
-    #I represents current
-def xx (I_R, C, d_v, d_t):
-    diff_I = I_R + C/(d_v*d_t)
+def current (c, t):
+    I = c/t
+        #Amp is rate of change of charge/rate of change of time
+def ohm_law (i, r):
+    v = i*r
+        #increasing voltage increases the current
+        #increase the rresistence current decrease
+        #more resistence harder for the current to flow
 
-def resistence (voltage, I):
-    R = voltage/I
+def electric_power (i, r):
+    p = (i**2) *r
+        #or I = V/R = V**2/R
+        #power is the rate of the energy that can be transfer
 
-#def voltage (I, R):
-  #voltage = I *R
-    #Finding the value of voltage, I, or R can be done through
-    # algebra manipulation
+def dv_dt (negative_one, tau, r, i , v, t):
 
+    aT = negative_one *(v *t) + r * (i *t)
 
-def resistor_inductor_circuit (V, R_C, d_v, d_t):
-    R1 = V + R_C*(d_v/d_t)
-
-def dv_dt (one, tau, RI, V):
-    a1 = (one/tau) * (RI - V)
-
-    # a1 = dv/dt
-    #the formula represents dv/dt = [-v(t) + R*I(t)](1/t)]
-    #local values means their initial value
-
-aT = a1
-    #dv is difference in vel
-    #dt i sdifference in time
-    #aT represents acceleration being impacted by the time value
-
-
+        #aT represents acceleration
+        # aT = dv/dt
+        #T represents time
 
 dt = .05
-#represents the amount of time increments increase of every iteration
+        #represents the amount of time increments increase of e
+        # very iteration
 max_t = 10
 start_time = 1
 stop_time = 6
-#start and stop time represents the duration for the program to run
+        #start and stop time represents the duration for the
+        # program to run
 
-cap = 1
-#capacitor
-res = 2
-#resistor
-    #R = Resistence
-threshold = 3
-#if it reaches the threshold then the voltage spikes to the max, 8
-spike_display = 8
-
-#this is the max value of the neuron before the electrical signal decays
-init_t = 0
-#initial time
+c = 1
+        #charge
+r = 2
+        #resistor
+t = 0
+        #time is equal to 0
 init_v = 0
-#initial voltage
+        #initial voltage
 
-injection_current = 4.3
 negative_one = -1
+
 one = 1
 
-#I = res + cap
-#constant values
+threshold = 3
+        #if it reaches the threshold then the voltage
+        # spikes to the max, 8
 
-tau = res*cap
+spike_display = 8
+        #this is the max value of the neuron
+        # before the electrical signal decays
 
-#def resting_potential()
-#the resting potential is when voltage = 0
-#resting means that there's no change
-#might not need to write a function for this
+
+    #I = res + cap
+    #constant values
+
+tau = r*c
+
+    #def resting_potential()
+    #the resting potential is when voltage = 0
+    #resting means that there's no change
+    #might not need to write a function for this
 
 
 while start_time >= stop_time:
-    init_t += dt
+    t += dt
     #this updates the initial value of time by the amount of delta time (0.5)
     #for every iteration of the new time value, we need to know the
     #resistence and the voltage value to get the new aT(dv/dt)
@@ -86,16 +81,5 @@ while start_time >= stop_time:
 
 
 
-
-#def run_integrate_fire
-
-#notes| things to work on still
-#create a function that helps the voltage amount decrease exponentially until
-#it reaches the resting potential, 0
-#create a method that increases the spike of the voltage from 3 to 8
-#create a method that decreases the voltage when it hits 8 to 0
-#set an if statement and a check statement to have the voltage increase from 0 to 3
-    #the check statement will be that when time == stop_time: break
-#create a graph that shows the voltage increase from every cycle
 
 
