@@ -1,3 +1,34 @@
+start_time = 1
+stop_time = 6
+inc = .5
+
+
+def (start_time, updated_time):
+
+
+while start_time> stop_time:
+    start_time += inc
+
+
+print (start_time)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #def xx (I_R, C, d_v, d_t):
    # diff_I = I_R + C/(d_v*d_t)
 

@@ -1,4 +1,3 @@
-import math
 import matplotlib.pyplot as plt
 
 def update_accelerations(positions, accelerations, constant_spring):
