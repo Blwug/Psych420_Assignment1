@@ -3,8 +3,6 @@ stop_time = 6
 inc = .5
 
 
-def (start_time, updated_time):
-
 
 while start_time> stop_time:
     start_time += inc
