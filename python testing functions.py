@@ -16,7 +16,7 @@ injectionCurrent = 4.3
 injectionStartTime = 1
 injectionEndTime = 6
 function_injection_value = []
-new_dv_dt_value = [4]
+new_dv_dt_value = []
 new_time = [0]
 new_voltage = [voltage]
 
@@ -30,8 +30,8 @@ def dv_dt(cap, res, current, new_voltage):
     new_dv_dt_value.append(function_dv_dt)
 
 
-def function_voltage(voltage, new_dv_dt_value, new_time):
-    function_voltage = voltage + new_dv_dt_value[-1] * new_time[-1]
+def function_voltage(voltage, new_dv_dt_value, time_step):
+    function_voltage = voltage + new_dv_dt_value[-1] * time_step
     new_voltage.append(function_voltage)
 
 
@@ -40,7 +40,7 @@ while initial_time < stop_time:
     dv_dt(cap, res, current, new_voltage)
     times(initial_time, new_time)
 
-    function_voltage(new_voltage[-1], new_dv_dt_value, new_time)
+    function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
     new_voltage[0] = resting_potential
     if new_voltage[-1] == voltage_tol:
         new_voltage [-1] = max_voltage
@@ -54,8 +54,8 @@ print(new_time)
 print(new_voltage)
 
 plt.plot(new_voltage, new_time, )
-plt.xlabel ('voltage')
-plt.ylabel('time')
+plt.ylabel ('voltage')
+plt.xlabel('time')
 plt.show()
 
 # def update_voltage (voltage, ):
