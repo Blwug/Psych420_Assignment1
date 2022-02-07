@@ -44,8 +44,12 @@ while initial_time < stop_time:
     new_voltage[0] = resting_potential
     if new_voltage[-1] < voltage_tol:
         new_voltage[-1] = voltage_tol
-    elif new_voltage[-1] <max_voltage:
+    elif new_voltage[-1] < max_voltage:
         new_voltage[-1] = max_voltage
+    else:
+        new_voltage[-1] == max_voltage
+        new_voltage[-1] = resting_potential
+
 
 print(new_dv_dt_value)
 print(new_time)
