@@ -1,4 +1,3 @@
-
 voltage = 1
 initial_voltage = voltage
 initial_time = 1
@@ -20,11 +19,8 @@ def acc (tau, one, voltage): # this stores the new value of acceleration, dv/dt
     new_acc_value.append(updated_acc)
 
 def voltages (voltage, new_acc_value, updated_time):
-    updated_voltage = voltage + new_acc_value * updated_time
+    updated_voltage = voltage + new_acc_value [-1] * updated_time [-1]
     new_voltage.append(updated_voltage)
-
-
-
 
 
 while initial_time <= stop_time:
@@ -32,16 +28,15 @@ while initial_time <= stop_time:
 
     acc(tau,one,voltage)
     times(initial_time, updated_time)
-   # voltages(voltage, new_acc_value, updated_time)
+    voltages(voltage, new_acc_value, updated_time)
 
     #def voltages (voltage, new_acc_value, updated_time): #this should get the new value of voltage
        # updated_voltage = voltage + new_acc_value *updated_time
         #new_voltage.append(updated_voltage)
 
-
 print (new_acc_value)
 print (updated_time)
-print(voltages)
+print(new_voltage)
 
 
 
@@ -57,4 +52,3 @@ print(voltages)
 #then update the value of voltage using old voltage + dv/dt*time_step
 
 #break down the questions to make it tolerable to do
-
