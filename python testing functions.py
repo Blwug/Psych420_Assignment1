@@ -42,20 +42,18 @@ while initial_time < stop_time:
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
     new_voltage[0] = resting_potential
-    if new_voltage[-1] == voltage_tol:
-        new_voltage [-1] = max_voltage
-    elif new_voltage[-1] < voltage_tol:
+    if new_voltage[-1] < voltage_tol:
         new_voltage[-1] = voltage_tol
-    #elif new_voltage[-1] == voltage_tol:
-        #new_voltage[-1] = max_voltage
+    elif new_voltage[-1] <max_voltage:
+        new_voltage[-1] = max_voltage
 
 print(new_dv_dt_value)
 print(new_time)
 print(new_voltage)
 
-plt.plot(new_voltage, new_time, )
-plt.ylabel ('voltage')
+plt.plot(new_time, new_voltage)
 plt.xlabel('time')
+plt.ylabel('voltage')
 plt.show()
 
 # def update_voltage (voltage, ):
