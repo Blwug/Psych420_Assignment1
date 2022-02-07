@@ -40,7 +40,7 @@ while initial_time < stop_time:
     dv_dt(cap, res, current, new_voltage)
     times(initial_time, new_time)
 
-    function_voltage(new_voltage, new_dv_dt_value, new_time)
+    function_voltage(new_voltage[-1], new_dv_dt_value, new_time)
     new_voltage[0] = resting_potential
     if new_voltage[-1] == voltage_tol:
         new_voltage [-1] = max_voltage
