@@ -10,14 +10,14 @@ res = 1
 voltage_tol = 3
 max_voltage = 8
 resting_potential = 0
-current = [4]
+current = 4
 
 injectionCurrent = 4.3
 injectionStartTime = 1
 injectionEndTime = 6
 function_injection_value = []
-new_dv_dt_value = []
-new_time = []
+new_dv_dt_value = [4]
+new_time = [0]
 new_voltage = [voltage]
 
 
@@ -54,8 +54,8 @@ print(new_time)
 print(new_voltage)
 
 plt.plot(new_voltage, new_time, )
-plt.ylabel('voltage')
-plt.xlabel('time')
+plt.xlabel ('voltage')
+plt.ylabel('time')
 plt.show()
 
 # def update_voltage (voltage, ):
