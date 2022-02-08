@@ -1,10 +1,9 @@
 import matplotlib.pyplot as plt
-import numpy as np
 
 voltage = 0
 initial_time = 0
 stop_time = 10
-time_step = .5
+time_step = .25
 cap = 2
 res = 1
 voltage_tol = 3
@@ -20,6 +19,7 @@ new_dv_dt_value = []
 new_time = [0]
 new_voltage = [voltage]
 
+#if the current injection time is true, then have the voltage run else have it fail the next interval of the threshold
 
 def times(initial_time, new_time):  # this stores the new value of time
     new_time.append(initial_time)
@@ -36,7 +36,8 @@ def function_voltage(voltage, new_dv_dt_value, time_step):
 
 
 
-while initial_time < stop_time:
+while initial_time < stop_time and injectionStartTime < injectionEndTime:
+    injectionCurrent = injectionCurrent * new_time[-1] #update the current value
     initial_time += time_step
     dv_dt(cap, res, current, new_voltage)
     times(initial_time, new_time)
@@ -49,11 +50,6 @@ while initial_time < stop_time:
         new_voltage[-1] = max_voltage
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
-
-#new_voltage is -max_voltage >0 then set it to resting potential
-
-    #elif new_voltage[-1] < max_voltage:
-       # new_voltage[-1] = resting_potential
 
 
 print(new_dv_dt_value)
