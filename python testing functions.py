@@ -2,8 +2,8 @@ import matplotlib.pyplot as plt
 
 voltage = 0
 initial_time = 0
-stop_time = 10
-time_step = .25
+stop_time = 14
+time_step = .1
 cap = 2
 res = 1
 voltage_tol = 3
@@ -35,7 +35,7 @@ def function_voltage(voltage, new_dv_dt_value, time_step):
     new_voltage.append(function_voltage)
 
 
-
+#we can do a nested loop.. no
 while initial_time < stop_time and injectionStartTime < injectionEndTime:
     injectionCurrent = injectionCurrent * new_time[-1] #update the current value
     initial_time += time_step
@@ -44,10 +44,20 @@ while initial_time < stop_time and injectionStartTime < injectionEndTime:
 
     #function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
 
+
     if new_voltage[-1] >=max_voltage:
         new_voltage[-1] = resting_potential
     elif new_voltage[-1] > voltage_tol:
         new_voltage[-1] = max_voltage
+    elif new_voltage [-1] < 0:
+        new_voltage[-1] = 0
+    elif new_time[-1] <2: #this function is the pesudo currentinjection time
+      new_voltage[-1] = 0
+    elif new_time[-1] >12:
+      new_voltage[-1] = 0
+    elif new_time[-1] >15:
+        new_voltage[-1] = 0
+
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
 
