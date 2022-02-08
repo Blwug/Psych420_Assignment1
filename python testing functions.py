@@ -11,13 +11,14 @@ max_voltage = 8
 resting_potential = 0
 current = 4
 
-injectionCurrent = 4.3
+injectionCurrent = 0
 injectionStartTime = 1
 injectionEndTime = 6
 function_injection_value = []
 new_dv_dt_value = []
 new_time = [0]
 new_voltage = [voltage]
+
 
 #if the current injection time is true, then have the voltage run else have it fail the next interval of the threshold
 
@@ -34,9 +35,12 @@ def function_voltage(voltage, new_dv_dt_value, time_step):
     function_voltage = voltage + new_dv_dt_value[-1] * time_step
     new_voltage.append(function_voltage)
 
+def function_current (injectionCurrent, new_time, injectionStartTime, injectionEndTime):
+    if new_time[-1] > injectionStartTime and new_time[-1] < injectionEndTime:
+
 
 #we can do a nested loop.. no
-while initial_time < stop_time and injectionStartTime < injectionEndTime:
+while initial_time < stop_time: #and injectionStartTime < injectionEndTime:
     injectionCurrent = injectionCurrent * new_time[-1] #update the current value
     initial_time += time_step
     dv_dt(cap, res, current, new_voltage)
@@ -73,10 +77,3 @@ plt.ylabel('voltage')
 plt.show()
 
 # def update_voltage (voltage, ):
-
-
-# set the value of voltage
-# update the value of voltage using dv/dt
-# then update the value of voltage using old voltage + dv/dt*time_step
-
-# break down the questions to make it tolerable to do
