@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-voltage = 1
+voltage = 0
 initial_time = 0
 stop_time = 10
 time_step = .5
@@ -19,7 +19,7 @@ function_injection_value = []
 new_dv_dt_value = []
 new_time = [0]
 new_voltage = [voltage]
-
+tolerance = 1
 
 def times(initial_time, new_time):  # this stores the new value of time
     new_time.append(initial_time)
@@ -41,14 +41,15 @@ while initial_time < stop_time:
     times(initial_time, new_time)
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
-    new_voltage[0] = resting_potential
-    if new_voltage[-1] < voltage_tol:
-        new_voltage[-1] = voltage_tol
-    elif new_voltage[-1] < max_voltage:
+
+    if abs(new_voltage[-1] - max_voltage) < tolerance:
+        new_voltage = resting_potential
+    elif new_voltage[-1] > voltage_tol:
         new_voltage[-1] = max_voltage
-    else:
-        new_voltage[-1] == max_voltage
-        new_voltage[-1] = resting_potential
+
+
+    #elif new_voltage[-1] < max_voltage:
+       # new_voltage[-1] = resting_potential
 
 
 print(new_dv_dt_value)
