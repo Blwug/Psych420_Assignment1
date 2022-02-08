@@ -19,7 +19,7 @@ function_injection_value = []
 new_dv_dt_value = []
 new_time = [0]
 new_voltage = [voltage]
-tolerance = 1
+
 
 def times(initial_time, new_time):  # this stores the new value of time
     new_time.append(initial_time)
@@ -35,18 +35,22 @@ def function_voltage(voltage, new_dv_dt_value, time_step):
     new_voltage.append(function_voltage)
 
 
+
 while initial_time < stop_time:
     initial_time += time_step
     dv_dt(cap, res, current, new_voltage)
     times(initial_time, new_time)
 
-    function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
+    #function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
 
-    if abs(new_voltage[-1] - max_voltage) < tolerance:
-        new_voltage = resting_potential
+    if new_voltage[-1] >=max_voltage:
+        new_voltage[-1] = resting_potential
     elif new_voltage[-1] > voltage_tol:
         new_voltage[-1] = max_voltage
 
+    function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
+
+#new_voltage is -max_voltage >0 then set it to resting potential
 
     #elif new_voltage[-1] < max_voltage:
        # new_voltage[-1] = resting_potential
@@ -55,6 +59,7 @@ while initial_time < stop_time:
 print(new_dv_dt_value)
 print(new_time)
 print(new_voltage)
+print(voltage_tol)
 
 plt.plot(new_time, new_voltage)
 plt.xlabel('time')
