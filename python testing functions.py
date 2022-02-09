@@ -77,5 +77,5 @@ plt.plot(new_time, new_voltage)
 plt.xlabel('time')
 plt.ylabel('voltage')
 plt.show()
-plt.savefig('I_and_F_graph.png')
+plt.savefig('Graph.png')
 # def update_voltage (voltage, ):
