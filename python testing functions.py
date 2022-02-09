@@ -34,13 +34,9 @@ def dv_dt(cap, res, current, new_voltage):
     new_dv_dt_value.append(function_dv_dt)
 
 
-def function_voltage(voltage, new_dv_dt_value, time_step):
-    function_voltage = (voltage + new_dv_dt_value[-1] * time_step)
+def function_voltage(voltage, new_dv_dt_value, time_step, new_injectiontime):
+    function_voltage = (voltage + new_dv_dt_value[-1] * time_step) * new_injectiontime[-1]
     new_voltage.append(function_voltage)
-
-
-
-#we can do a nested loop.. no
 
 
 while initial_time < stop_time: #and injectionStartTime < injectionEndTime:
@@ -49,11 +45,12 @@ while initial_time < stop_time: #and injectionStartTime < injectionEndTime:
     dv_dt(cap, res, current, new_voltage)
     times(initial_time, new_time)
 
-
-    if injectionStartTime >= injectionEndTime:
-        injectionStartTime = 1
-    #elif injectionStartTime <= injectionEndTime:
-      #      injectionStartTime = 0
+    if new_time [-1] < 2:
+        injectionStartTime = 0
+    elif new_time[-1] >12:
+        injectionStartTime = 0
+    elif new_time[-1] > 2:
+            injectionStartTime = 1
 
     current_injection(injectionStartTime, new_injectiontime)
 
@@ -65,7 +62,7 @@ while initial_time < stop_time: #and injectionStartTime < injectionEndTime:
     elif new_time[-1] <2:
       new_voltage[-1] = 0
 
-    function_voltage(new_voltage[-1], new_dv_dt_value, time_step)
+    function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime)
 
 
 
