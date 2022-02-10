@@ -19,10 +19,9 @@ new_dv_dt_value = []
 new_time = [0]
 new_voltage = [voltage]
 new_current = [injectionCurrent]
-new_injectiontime = [injectionCurrent]
-#if the current injection time is true, then have the voltage run else have it fail the next interval of the threshold
+new_injectiontime = [injectionCurrent] #inital value is the static injectionCurrent value
 
-def times(initial_time, new_time):  # this stores the new value of time
+def times(initial_time, new_time):  # updates the time value
     new_time.append(initial_time)
 
 def current_injection (injectionStartTime, new_injectiontime):
@@ -35,24 +34,24 @@ def dv_dt(cap, res, current, new_voltage):
 
 
 def function_voltage(voltage, new_dv_dt_value, time_step, new_injectiontime):
-    function_voltage = (voltage + new_dv_dt_value[-1] * time_step) * new_injectiontime[-1]
+    function_voltage = (voltage + new_dv_dt_value[-1] * time_step) * new_injectiontime[-1] #if the last element of new_injectiontime is 0 then that means there is no voltage
     new_voltage.append(function_voltage)
 
 
-while initial_time < stop_time: #and injectionStartTime < injectionEndTime:
+while initial_time < stop_time:
 
-    initial_time += time_step
+    initial_time += time_step #updates the time value
     dv_dt(cap, res, current, new_voltage)
     times(initial_time, new_time)
 
-    if new_time [-1] < 2:
+    if new_time [-1] < 2: #if the last element of new_time is less than 2, or greater than 12 than there is no current
         injectionStartTime = 0
     elif new_time[-1] >12:
         injectionStartTime = 0
     elif new_time[-1] > 2:
             injectionStartTime = 1
 
-    current_injection(injectionStartTime, new_injectiontime)
+    current_injection(injectionStartTime, new_injectiontime) #updates the current_injection value given the while condition is true
 
 
     if new_voltage[-1] >=max_voltage:
@@ -62,7 +61,7 @@ while initial_time < stop_time: #and injectionStartTime < injectionEndTime:
     elif new_time[-1] <2:
       new_voltage[-1] = 0
 
-    function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime)
+    function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime) #calls
 
 
 
@@ -78,4 +77,3 @@ plt.xlabel('time')
 plt.ylabel('voltage')
 plt.show()
 plt.savefig('Graph.png')
-# def update_voltage (voltage, ):
