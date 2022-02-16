@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 
 voltage = 0
 initial_time = 0
-stop_time = 14
+stop_time = 20
 time_step = .1
 cap = 1
 res = 1
@@ -21,14 +21,16 @@ new_voltage = [voltage]
 new_current = [injectionCurrent]
 new_injectiontime = [injectionCurrent] #inital value is the static injectionCurrent value
 
+#put in the constants
+#put in the value of alpha (channels opening; requires all of them to be open)
+#put in the value of beta (channels closing; if one closed then rest follows -> expotentional decay)
+#don't forget the euler is constant!!
 
 def times(initial_time, new_time):  # updates the time value
     new_time.append(initial_time)
 
 def current_injection (injectionStartTime, new_injectiontime):
         new_injectiontime.append(injectionStartTime)
-
-
 
 def dv_dt(cap, res, current, new_voltage):
     function_dv_dt = (1 / (cap * res)) * (res * current - new_voltage[-1])
@@ -51,6 +53,7 @@ while initial_time < stop_time:
         injectionStartTime = 0
     elif new_time[-1] > 2:
         injectionStartTime = 1
+
     current_injection(injectionStartTime, new_injectiontime) #updates the current_injection value given the while condition is true
 
 
