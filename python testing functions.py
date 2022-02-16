@@ -81,8 +81,7 @@ def beta_h (new_voltage, e):
 
 
 #change of voltage = dv_dt_value
-#
-def hh_model (new_dv_dt_value, )
+#def hh_model (new_dv_dt_value, )
 
 #the dv/dt formula = -(I subscript stim +I subscript ionic)/Cm
 #I subscript ionic is equal to the sum of Na, K and leakage currents
