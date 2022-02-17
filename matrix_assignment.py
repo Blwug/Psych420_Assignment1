@@ -35,10 +35,16 @@ dp = np.dot(matrix_1 [3], matrix_2[3])
 #nc = np.dot(matrix_1[1] * matrix_2[2])
 #pd = np.dot(matrix_1 [3] * matrix_2[3])
 product_am_cn = am + cn
-product_matrix = ([product_am_cn], cp)
+product_bm_dn = bm +dn
+product_ao_cp = ao + cp
+product_bo_dp = bo + dp
+row_one_product_matrix_a_b = ([product_am_cn], [product_bm_dn])
+row_two_product_matrix_a_b = ([product_ao_cp], [product_bo_dp])
+
+print("This is the product of matrix_1 * matrix_2 " + str(row_one_product_matrix_a_b) + str(row_two_product_matrix_a_b))
 
 
-print (product_matrix[0], product_matrix [-1])
+
 
 
 
