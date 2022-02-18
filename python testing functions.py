@@ -32,8 +32,8 @@ new_injectiontime = [injectionCurrent] #inital value is the static injectionCurr
 
 new_alpha_n = []
 new_beta_n = []
-new_alpha_m = []
-new_beta_m = []
+new_alpha_m = [1]
+new_beta_m = [1]
 new_alpha_h = [] #Na inactivation
 new_beta_h = []
 
@@ -60,7 +60,7 @@ def function_voltage(voltage, new_dv_dt_value, time_step, new_injectiontime):
 
 #voltage dependent values
 def alpha_n (new_voltage, e): #potassium activation|if alpha>beta than increased liklihood for it to open
-    function_alpham = -0.01 * ((new_voltage [-1] +60) / e**(new_voltage[-1] +60/-10))-1
+    function_alpha_m = -0.01 * ((new_voltage [-1] +60) / e**(new_voltage[-1] +60/-10))-1
     new_alpha_n.append(function_alpham)
 
 def beta_n (new_voltage, e): #potassium activation | if beta is high then more likely for it to close
@@ -88,7 +88,7 @@ def dn_dt (new_alpha_n, new_voltage, n, new_beta_n): #change in number of open p
     new_function_dn_dt.append(function_dn_dt)
 
 def dm_dt (new_alpha_m, new_voltage, m, new_beta_m):
-    function_dm_dt = new_alpha_m * new_voltage[-1] *(1-m) - new_beta_m *new_voltage[-1] *m
+    function_dm_dt = new_alpha_m [-1] * new_voltage[-1] *(1-m) - new_beta_m *new_voltage[-1] *m
     new_function_dm_dt.append(function_dm_dt)
 
 
@@ -120,6 +120,7 @@ print(new_dv_dt_value)
 print(new_time)
 print(new_voltage)
 print(new_injectiontime)
+
 
 plt.plot(new_time, new_voltage)
 plt.xlabel('time')
