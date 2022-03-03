@@ -1,34 +1,21 @@
-res = 2
+voltage = 0
+init_t = 0
+stop_time = 14
+time_step = .1
 cap = 1
-voltage = 3
-current = 2
-new_dv_dt = []
-initial_time = 0
-end_time = 2
-time_step =.5
-updated_time = []
-def dv_dt (res, cap, voltage): #derivative of voltage in relation to time
-    updated_dv_dt = (1/res*cap) * (res * current - voltage)
-    new_dv_dt.append(updated_dv_dt)
+res = 2
+voltage_tol = 4
+max_voltage = 8
+resting_potential = 0
+current = 1
 
-def new_time (initial_time, updated_time):
-    updated_time.append(initial_time)
+new_t = []
 
-while initial_time < end_time:
-    initial_time += time_step
+def times (init_t, new_t):
+    new_t.append (init_t)
 
-    new_time(initial_time, updated_time)
-    dv_dt(res, cap, voltage)
+while init_t <stop_time:
+    init_t += time_step
+    times (init_t, new_t)
 
-print ("this is the the time value", updated_time)
-print ("this is the derivative of voltage in relation to time", new_dv_dt)
-
-
-
-
-
-
-
-
-
-
+print(new_t)
