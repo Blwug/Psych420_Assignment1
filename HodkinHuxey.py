@@ -67,10 +67,11 @@ def h_infinity(volt):
 def times (init_t, new_t):
     new_t.append(init_t)
 
-def vt (voltage, time_step):
-    return (voltage + dvdt) * time_step
+def update(rate_of_change, old_value, time_step):
+    return ((rate_of_change + time_step) * old_value)
 
 current_voltage = vt
+
 
 def injection_time(init_injection, new_injection):
     new_injection.append (init_injection)
@@ -84,6 +85,11 @@ def dvdt (current_voltage, current_injection, m, n, h):   #values that we need t
 
     return current_injection - (ina + ik + il)
 
+
+def update (old_value, rate_of_change, time_step):
+    return ((rate_of_change * time_ste1p) + old_value)
+
+
 def between (x, new_injection):
 
     if (x >= new_injection[0]) and (x <= new_injection[1]):
@@ -92,18 +98,21 @@ def between (x, new_injection):
         return 0
 
 
+def run():
+
+    h_sim = h_dot(voltage, h_sim)
+    n_sim = n_dot(voltage, n_sim)
+    m_sim = m_sim(voltage, m_sim)
+
 while init_t < end_time:
     init_t += time_step
     times(init_t, new_t)
 
+    inj_cur
 
-    #h_sim = h_dot(voltage, h_sim)
-    #n_sim = n_dot(voltage, n_sim)
-    #m_sim = m_sim(voltage, m_sim)
-
-    #m_sim = m_infinity(voltage)
-    #n_sim = n_infinity(voltage)
-    #h_sim = h_infinity(voltage)
+    m_sim = m_infinity(voltage)
+    n_sim = n_infinity(voltage)
+    h_sim = h_infinity(voltage)
 
     #voltages.append(h_sim)
 
