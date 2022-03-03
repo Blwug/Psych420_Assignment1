@@ -42,9 +42,10 @@ new_function_h_dot = []
 new_function_m_infinity = []
 new_function_n_infinity = []
 new_function_h_infinity = []
-new_ina:list[float] = [1.0]
-new_ik:list[float] = [1.0]
-new_il:list[float] = [1.0]
+
+new_ina = [1.0]
+new_ik = [1.0]
+new_il = [1.0]
 
 
 new_not_dv_dt_value = [1]
@@ -131,12 +132,13 @@ def fx_ina (gna, hh_m, new_voltage, ena, hh_h):
 def fx_ik (gk, hh_n, new_voltage, ek):
     ik = gk * pow(hh_n, 4) *(new_voltage[-1] - ek)
     new_ik.append(ik)
+
 def fx_il (gl, new_voltage, el):
     il = gl * (new_voltage[-1] - el)
     new_il.append(il)
 
-def not_dv_dt (new_ina, new_ik, new_il):
-    function_not_dv_dt = new_injectiontime[-1] - (new_ina[-1] + new_ik[-1] + new_il[1])
+def not_dv_dt (new_ina, new_ik, new_il): #new_injectiontime
+    function_not_dv_dt = new_injectiontime - (new_ina + new_ik + new_il)
     new_not_dv_dt_value.append(function_not_dv_dt)
 
 
@@ -161,7 +163,7 @@ while initial_time < stop_time:
         new_voltage[-1] = max_voltage
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime) #calls
-    not_dv_dt(new_ina[-1], new_ik[-1], new_il[-1])
+    not_dv_dt(new_ina[-1], new_ik[-1], new_il[-1]) #new_injectiontime
 
 
 #print(new_dv_dt_value)
