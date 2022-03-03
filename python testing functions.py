@@ -38,7 +38,7 @@ new_alpha_h = [] #Na inactivation
 new_beta_h = []
 
 
-value = []
+value = [1]
 new_not_dv_dt_value = [1]
 
 
@@ -121,7 +121,7 @@ def not_dv_dt(new_voltage, new_injectiontime, hh_m, hh_n, hh_h, gna, gk,gl): #hh
     ik = gk * pow(hh_n, 4) *(new_voltage[-1] - ek)
     il = gl * (new_voltage - el)
 
-    function_not_dv_dt = new_injectiontime - (ina + ik + il)
+    function_not_dv_dt = new_injectiontime[-1] - (ina + ik + il)
     new_not_dv_dt_value.append(function_not_dv_dt)
 
 def change(new_dv_dt_value, not_dv_dt):
@@ -150,6 +150,7 @@ while initial_time < stop_time:
         new_voltage[-1] = max_voltage
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime) #calls
+    not_dv_dt(new_voltage[-1], new_injectiontime[-1], hh_m, hh_n, hh_h, gna, gk, gl)
 
 
 
