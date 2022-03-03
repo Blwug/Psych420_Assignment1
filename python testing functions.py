@@ -48,7 +48,7 @@ new_ik = [1.0]
 new_il = [1.0]
 
 
-new_not_dv_dt_value = [1]
+new_not_dv_dt_value = [0]
 value = [1]
 
 
@@ -137,8 +137,8 @@ def fx_il (gl, new_voltage, el):
     il = gl * (new_voltage[-1] - el)
     new_il.append(il)
 
-def not_dv_dt (new_ina, new_ik, new_il): #new_injectiontime
-    function_not_dv_dt = new_injectiontime - (new_ina + new_ik + new_il)
+def not_dv_dt (new_ina, new_ik, new_il, new_injectiontime): #new_injectiontime
+    function_not_dv_dt = (new_ina + new_ik + new_il) * new_injectiontime #new_injectiontime -
     new_not_dv_dt_value.append(function_not_dv_dt)
 
 
@@ -163,15 +163,19 @@ while initial_time < stop_time:
         new_voltage[-1] = max_voltage
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime) #calls
-    not_dv_dt(new_ina[-1], new_ik[-1], new_il[-1]) #new_injectiontime
+    not_dv_dt(new_ina[-1], new_ik[-1], new_il[-1],new_injectiontime[-1]) #new_injectiontime
 
 
 #print(new_dv_dt_value)
 #print(new_time)
 #print(new_voltage)
-#print(new_injectiontime)
-print (value)
+print(new_injectiontime)
 print(new_not_dv_dt_value)
+
+
+plt.plot (new_time, new_not_dv_dt_value)
+plt.xlabel('time')
+plt.ylabel('current')
 
 plt.plot(new_time, new_voltage)
 plt.xlabel('time')
