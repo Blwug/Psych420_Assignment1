@@ -6,8 +6,8 @@ stop_time = 14.0
 time_step = .1
 cap = 1.0
 res = 2.0
-voltage_tol = 3.0
-max_voltage = 8.0
+voltage_tol = 3
+max_voltage = 8
 resting_potential = 0.0
 current = 4.0
 
@@ -56,9 +56,9 @@ n = 1
 h = 1
 m = h
 
-hh_m = 3
+hh_m = 2
 hh_n = 4
-hh_h = 4
+hh_h = 6
 
 def times(initial_time, new_time):  # updates the time value
     new_time.append(initial_time)
@@ -160,15 +160,18 @@ while initial_time < stop_time:
     elif new_voltage[-1] > voltage_tol:
         new_voltage[-1] = max_voltage
 
+    #if new_dv_dt_value[-1] == 12.0:
+        #new_dv_dt_value[-1] += 2
+
+
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime) #calls
     not_dv_dt(new_ina[-1], new_ik[-1], new_il[-1],new_injectiontime[-1]) #new_injectiontime
 
 
-#print(new_dv_dt_value)
-#print(new_time)
-#print(new_voltage)
-print(new_injectiontime)
-print(new_not_dv_dt_value)
+print("new rate of change " +str(new_dv_dt_value))
+print("new time  " +str(new_time))
+print("new voltage " + str(new_voltage))
+print("new injection current  " +str(new_not_dv_dt_value))
 
 
 plt.plot (new_time, new_not_dv_dt_value)
