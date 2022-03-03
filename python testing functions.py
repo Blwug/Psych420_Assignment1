@@ -36,16 +36,24 @@ new_alpha_m = [1]
 new_beta_m = [1]
 new_alpha_h = [] #Na inactivation
 new_beta_h = []
+new_function_m_dot = []
+new_function_n_dot = []
+new_function_h_dot = []
+new_function_m_infinity = []
+new_function_n_infinity = []
+new_function_h_infinity = []
+new_ina = [1]
+new_ik = [1]
+new_il = [1]
 
 
-value = [1]
 new_not_dv_dt_value = [1]
+value = [1]
 
 
 n = 1
 h = 1
 m = h
-
 
 hh_m = 3
 hh_n = 4
@@ -116,13 +124,21 @@ def dv_dt(cap, res, current, new_voltage):
     function_dv_dt = (1 / (cap * res)) * (res * current - new_voltage[-1])
     new_dv_dt_value.append(function_dv_dt)
 
-def not_dv_dt(new_voltage, new_injectiontime, hh_m, hh_n, hh_h, gna, gk,gl): #hh_m,n,h can be sub in for anything its just an arg
+def fx_ina (gna, hh_m, new_voltage, ena, hh_h):
     ina = gna * pow(hh_m, 3.0) * hh_h & (new_voltage[-1] - ena)
-    ik = gk * pow(hh_n, 4) *(new_voltage[-1] - ek)
-    il = gl * (new_voltage[-1] - el)
+    new_ina.append(ina)
 
-    function_not_dv_dt = new_injectiontime[-1] - (ina + ik + il)
+def fx_ik (gk, hh_n, new_voltage, ek):
+    ik = gk * pow(hh_n, 4) *(new_voltage[-1] - ek)
+    new_ik.append(ik)
+def fx_il (gl, new_voltage, el):
+    il = gl * (new_voltage[-1] - el)
+    new_il.append(il)
+
+def not_dv_dt (new_ina, new_ik, new_il):
+    function_not_dv_dt = new_injectiontime[-1] - (new_ina[-1] + new_ik[-1] + new_il[1])
     new_not_dv_dt_value.append(function_not_dv_dt)
+
 
 def change(new_dv_dt_value, not_dv_dt):
     return ((new_dv_dt_value * not_dv_dt))
@@ -150,7 +166,8 @@ while initial_time < stop_time:
         new_voltage[-1] = max_voltage
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime) #calls
-    not_dv_dt(new_voltage[-1], new_injectiontime[-1], hh_m, hh_n, hh_h, gna, gk, gl)
+    not_dv_dt(new_ina, new_ik, new_il)
+
 
 
 
