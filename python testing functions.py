@@ -166,9 +166,7 @@ while initial_time < stop_time:
         new_voltage[-1] = max_voltage
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime) #calls
-    not_dv_dt(new_ina, new_ik, new_il)
-
-
+    not_dv_dt(new_ina[-1], new_ik[-1], new_il[-1])
 
 
 #print(new_dv_dt_value)
