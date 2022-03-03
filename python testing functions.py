@@ -1,39 +1,39 @@
 import matplotlib.pyplot as plt
 
-voltage = 0
-initial_time = 0
-stop_time = 14
+voltage = 0.0
+initial_time = 0.0
+stop_time = 14.0
 time_step = .1
-cap = 1
-res = 2
-voltage_tol = 3
-max_voltage = 8
-resting_potential = 0
-current = 4
+cap = 1.0
+res = 2.0
+voltage_tol = 3.0
+max_voltage = 8.0
+resting_potential = 0.0
+current = 4.0
 
-ena = 115
-gna = 120
-ek = -12
-gk = 36
+ena = 115.0
+gna = 120.0
+ek = -12.0
+gk = 36.0
 el = 10.6
 gl = 0.3
 e = 2.71828 #could replace with import math and then use exp.. eh
 
 
-injectionCurrent = 0
-injectionStartTime = 0
-injectionEndTime = 6
+injectionCurrent = 0.0
+injectionStartTime = 0.0
+injectionEndTime = 6.0
 function_injection_value = []
 new_dv_dt_value = []
-new_time = [0]
+new_time = [0.0]
 new_voltage = [voltage]
 new_current = [injectionCurrent]
 new_injectiontime = [injectionCurrent] #inital value is the static injectionCurrent value
 
 new_alpha_n = []
 new_beta_n = []
-new_alpha_m = [1]
-new_beta_m = [1]
+new_alpha_m = [1.0]
+new_beta_m = [1.0]
 new_alpha_h = [] #Na inactivation
 new_beta_h = []
 new_function_m_dot = []
@@ -42,9 +42,9 @@ new_function_h_dot = []
 new_function_m_infinity = []
 new_function_n_infinity = []
 new_function_h_infinity = []
-new_ina = [1]
-new_ik = [1]
-new_il = [1]
+new_ina:list[float] = [1.0]
+new_ik:list[float] = [1.0]
+new_il:list[float] = [1.0]
 
 
 new_not_dv_dt_value = [1]
@@ -140,10 +140,6 @@ def not_dv_dt (new_ina, new_ik, new_il):
     new_not_dv_dt_value.append(function_not_dv_dt)
 
 
-def change(new_dv_dt_value, not_dv_dt):
-    return ((new_dv_dt_value * not_dv_dt))
-
-
 while initial_time < stop_time:
 
     initial_time += time_step #updates the time value
@@ -156,7 +152,6 @@ while initial_time < stop_time:
     elif new_time[-1] > 2:
         injectionStartTime = 1
     current_injection(injectionStartTime, new_injectiontime) #updates the current_injection value given the while condition is true
-    value = change (new_dv_dt_value[-1], new_not_dv_dt_value[-1])
 
 
     if new_voltage[-1] >=max_voltage or new_time[-1] <2:
