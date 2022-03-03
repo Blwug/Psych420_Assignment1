@@ -119,7 +119,7 @@ def dv_dt(cap, res, current, new_voltage):
 def not_dv_dt(new_voltage, new_injectiontime, hh_m, hh_n, hh_h, gna, gk,gl): #hh_m,n,h can be sub in for anything its just an arg
     ina = gna * pow(hh_m, 3.0) * hh_h & (new_voltage[-1] - ena)
     ik = gk * pow(hh_n, 4) *(new_voltage[-1] - ek)
-    il = gl * (new_voltage - el)
+    il = gl * (new_voltage[-1] - el)
 
     function_not_dv_dt = new_injectiontime[-1] - (ina + ik + il)
     new_not_dv_dt_value.append(function_not_dv_dt)
