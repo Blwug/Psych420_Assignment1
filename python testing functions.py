@@ -120,9 +120,8 @@ def h_infinity (new_alpha_h, new_beta_h):
     function_h_infinity = new_alpha_h[-1] /(new_alpha_h[-1] + new_beta_h[-1])
     new_function_h_infinity.append(function_h_infinity)
 
-
-def dv_dt(cap, res, current, new_voltage):
-    function_dv_dt = (1 / (cap * res)) * (res * current - new_voltage[-1])
+def dv_dt(cap, res, current, new_voltage, new_not_dv_dt_value):
+    function_dv_dt = ((1 / (cap * res)) * (res * current - new_voltage[-1]) * new_not_dv_dt_value[-1])
     new_dv_dt_value.append(function_dv_dt)
 
 def fx_ina (gna, hh_m, new_voltage, ena, hh_h):
@@ -145,7 +144,7 @@ def not_dv_dt (new_ina, new_ik, new_il, new_injectiontime): #new_injectiontime
 while initial_time < stop_time:
 
     initial_time += time_step #updates the time value
-    dv_dt(cap, res, current, new_voltage)
+    dv_dt(cap, res, current, new_voltage, new_not_dv_dt_value)
     times(initial_time, new_time)
 
 
@@ -154,7 +153,6 @@ while initial_time < stop_time:
     elif new_time[-1] > 2:
         injectionStartTime = 1
     current_injection(injectionStartTime, new_injectiontime) #updates the current_injection value given the while condition is true
-
 
     if new_voltage[-1] >=max_voltage or new_time[-1] <2:
         new_voltage[-1] = resting_potential
