@@ -23,7 +23,7 @@ injectionCurrent = 0.0
 injectionStartTime = 0.0
 injectionEndTime = 6.0
 function_injection_value = []
-new_dv_dt_value = []
+
 new_time = [0.0]
 new_voltage = [voltage]
 new_current = [injectionCurrent]
@@ -46,7 +46,7 @@ new_ina = [2.0]
 new_ik = [5.0]
 new_il = [3.0]
 
-new_not_dv_dt_value = [0.0]
+dv_dt_value = [0.0]
 
 hh_m = [0.4]
 
@@ -61,7 +61,7 @@ def function_voltage(rate_of_change, time_step,new_injectiontime):  # injectiont
 
 def rate_of_change(new_ina, new_ik, new_il, new_injectiontime):
     function_not_dv_dt = new_injectiontime - (new_ina + new_ik + new_il)
-    new_not_dv_dt_value.append(function_not_dv_dt)
+    dv_dt_value.append(function_not_dv_dt)
 
 def alpha_n(volts):  # general formula, we'll specify the value within the update function
     function_alpha_n = (0.1 - (0.01 * volts / (exp(1 - (0.1 * volts)) - 1)))
@@ -122,10 +122,6 @@ def h_infinity(hh_alpha_h, hh_beta_h):
     new_function_h_infinity.append(function_h_infinity)
 
 
-def dv_dt(cap, res, current, new_voltage):
-    function_dv_dt = ((1 / (cap * res)) * (res * current - new_voltage))
-    new_dv_dt_value.append(function_dv_dt)
-
 def _hh_m(new_function_m_dot, new_function_m_infinity):
     function_hh_m = ((new_function_m_dot * new_function_m_infinity))
     hh_m.append(function_hh_m)
@@ -154,8 +150,6 @@ def fx_il(gl, new_voltage, el):
     il = ((gl * (new_voltage - el)))
     new_il.append(il)
 
-
-
 def times(initial_time, new_time):  # updates the time value
     new_time.append(initial_time)
 
@@ -167,7 +161,6 @@ def current_injection(injectionStartTime, new_injectiontime):
 while initial_time <= stop_time:
 
     initial_time += time_step  # updates the time value
-    dv_dt(cap, res, current, new_voltage[-1])
     times(initial_time, new_time)
 
     if new_time[-1] < 2 or new_time[
@@ -208,13 +201,12 @@ while initial_time <= stop_time:
     _hh_h(new_function_h_dot[-1], new_function_h_infinity[-1])
 
 
-
-    function_voltage(new_not_dv_dt_value[-1], time_step, new_injectiontime[-1])  # calls
+    function_voltage(dv_dt_value[-1], time_step, new_injectiontime[-1])  # calls
 
     rate_of_change(new_ina[-1], new_ik[-1], new_il[-1], new_injectiontime[-1])  # new_injectiontime
 
 
-print("new rate of change  " + str(new_not_dv_dt_value))
+print("new rate of change  " + str(dv_dt_value))
 #print("injection " +str(new_injectiontime))
 #print("hh_m " +str(hh_m))
 #print("ina  " +str(new_ina))
@@ -227,7 +219,7 @@ print("new rate of change  " + str(new_not_dv_dt_value))
 #print ("wah" + str(new_function_m_infinity)) ~ .053
 
 
-plt.plot(new_time, new_not_dv_dt_value)
+plt.plot(new_time, dv_dt_value)
 plt.xlabel('time')
 plt.ylabel('voltage')
 
