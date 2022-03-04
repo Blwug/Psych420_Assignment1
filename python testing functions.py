@@ -139,12 +139,12 @@ def _hh_h (h, new_function_h_dot, new_function_h_infinity, new_injectiontime):
     hh_h.append(function_hh_h)
 
 def fx_ina(gna, hh_m, new_voltage, ena, hh_h, new_time):
-    ina = (gna * pow(hh_m, 3.0) * hh_h & (new_voltage[-1] - ena) * new_time[-1])
+    ina = (gna * pow(hh_m[-1], 3.0) * hh_h[-1] & (new_voltage[-1] - ena) * new_time[-1])
     new_ina.append(ina)
 
 
 def fx_ik(gk, hh_n, new_voltage, ek, new_time):
-    ik = (gk * pow(hh_n, 4) * (new_voltage[-1] - ek) * new_time[-1])
+    ik = (gk * pow(hh_n[-1], 4) * (new_voltage[-1] - ek) * new_time[-1])
     new_ik.append(ik)
 
 
@@ -192,9 +192,25 @@ while initial_time < stop_time:
     elif new_voltage[-1] > voltage_tol:
         new_voltage[-1] = max_voltage
 
+    fx_ina(gna, hh_m, new_voltage, ena, hh_h, new_time)
+    fx_ik(gk, hh_n, new_voltage, ek, new_time)
+    fx_il(gl, new_voltage, el, new_time)
+    h_infinity(new_alpha_h, new_beta_h)
+    n_infinity(new_alpha_n, new_beta_n)
+    m_infinity(new_alpha_m, new_beta_m)
+    h_dot(new_alpha_h, new_beta_h, h)
+    n_dot(new_alpha_n, new_beta_n, n)
+    m_dot(new_alpha_m, new_beta_m, m)
+    beta_h(new_voltage, e)
+    alpha_h(new_voltage, e)
+    beta_m(new_voltage, e)
+    alpha_m(new_voltage, e)
+    beta_n(new_voltage, e)
+    alpha_n(new_voltage, e)
     _hh_m(m, new_function_m_dot, new_function_m_infinity,new_injectiontime)
     _hh_n(n, new_function_n_dot, new_function_n_infinity, new_injectiontime)
     _hh_h(h, new_function_h_dot, new_function_h_infinity, new_injectiontime)
+
 
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime)  # calls
@@ -208,6 +224,7 @@ print("new injection current  " + str(new_not_dv_dt_value))
 print("hh_m " +str(hh_m))
 print("hh_n" +str(hh_n))
 print("hh_h" +str(hh_h))
+print("ina  " +str(new_ina))
 
 plt.plot(new_time, new_not_dv_dt_value)
 plt.xlabel('time')
