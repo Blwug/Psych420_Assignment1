@@ -11,8 +11,8 @@ max_voltage = 8
 resting_potential = 0.0
 current = 4.0
 
-ena = 115.0
-gna = 120.0
+ena = [115.0]
+gna = [120.0]
 ek = -12.0
 gk = 36.0
 el = 10.6
@@ -49,13 +49,13 @@ new_il = [3.0]
 new_not_dv_dt_value = [0.0]
 value = [2.0]
 
-hh_m = [0]
+hh_m = [0.0]
 m = 2.0
 
-hh_n = [0]
+hh_n = [0.0]
 n = 4.0
 
-hh_h = [0]
+hh_h = [0.0]
 h = 6.0
 
 # we need to update the values of either n,h,m or hh_m, hh_n, hh_h so that it actually works
@@ -137,15 +137,18 @@ def _hh_h (h, new_function_h_dot, new_function_h_infinity, new_injectiontime):
     function_hh_h = ((h * new_function_h_dot[-1] / new_function_h_infinity[-1]) * new_injectiontime[-1])
     hh_h.append(function_hh_h)
 
-def fx_ina(gna, hh_m, new_voltage, ena, hh_h, new_time):
-    ina = (gna * pow(hh_m[-1], 3.0) * hh_h[-1] & (new_voltage[-1] - ena) * new_time[-1])
+#def fx_ina(gna, hh_m, new_voltage, ena, hh_h, new_time):
+ #   ina = (gna * pow(hh_m[-1], 3.0) * hh_h[-1] & (new_voltage[-1] - ena) * new_time[-1])
+  #  new_ina.append(ina)
+
+def fx_ina(gna, hh_m, volts, ena, hh_h, current_time):
+    ina = (gna * pow(hh_m, 3.0) * hh_h & (volts - ena) * current_time)
     new_ina.append(ina)
 
 
 def fx_ik(gk, hh_n, new_voltage, ek, new_time):
     ik = (gk * pow(hh_n[-1], 4) * (new_voltage[-1] - ek) * new_time[-1])
     new_ik.append(ik)
-
 
 def fx_il(gl, new_voltage, el, new_time):
     il = ((gl * (new_voltage[-1] - el) * new_time[-1]) )
@@ -194,7 +197,7 @@ while initial_time < stop_time:
 
     m_dot(new_alpha_m[-1], new_beta_m[-1], m)
 
-    alpha_n(new_voltage[-1], e)
+    alpha_n(new_voltage[-1], e) #volts = new_voltage[-1] because we are redefining that within this statement
     alpha_m(new_voltage[-1], e)
     alpha_h(new_voltage[-1], e)
     beta_n(new_voltage[-1], e)
@@ -203,6 +206,8 @@ while initial_time < stop_time:
     m_infinity(new_alpha_m[-1], new_beta_m[-1])
     n_infinity(new_alpha_n[-1], new_beta_n[-1])
     h_infinity(new_alpha_h[-1], new_beta_h[-1])
+
+    fx_ina(gna[0], hh_m[-1], new_voltage[-1], ena[0], hh_h[-1], new_time[-1])
 
 
     _hh_m(m, new_function_m_dot, new_function_m_infinity,new_injectiontime)
@@ -214,15 +219,16 @@ while initial_time < stop_time:
 
     not_dv_dt(new_ina[-1], new_ik[-1], new_il[-1], new_injectiontime[-1])  # new_injectiontime
 
-print("new rate of change " + str(new_dv_dt_value))
-print("new time  " + str(new_time))
-print("new voltage " + str(new_voltage))
-print("new injection current  " + str(new_not_dv_dt_value))
+#print("new rate of change " + str(new_dv_dt_value))
+#print("new time  " + str(new_time))
+#print("new voltage " + str(new_voltage))
+#print("new injection current  " + str(new_not_dv_dt_value))
+
 print("hh_m " +str(hh_m))
 print("hh_n" +str(hh_n))
 print("hh_h" +str(hh_h))
 #print("ina  " +str(new_ina))
-print ("hh_n " +str(hh_n))
+
 
 plt.plot(new_time, new_not_dv_dt_value)
 plt.xlabel('time')
