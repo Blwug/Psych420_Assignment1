@@ -126,31 +126,30 @@ def dv_dt(cap, res, current, new_voltage, new_not_dv_dt_value):
     new_dv_dt_value.append(function_dv_dt)
 
 
-def _hh_m(m, new_function_m_dot, new_function_m_infinity):
-    function_hh_m = m * new_function_m_dot[-1] + new_function_m_infinity[-1]
+def _hh_m(m, new_function_m_dot, new_function_m_infinity, new_injectiontime):
+    function_hh_m = ((m * new_function_m_dot[-1] + new_function_m_infinity[-1]) * new_injectiontime[-1])
     hh_m.append(function_hh_m) #we do this again 2 more times
 
-def _hh_n(n,new_function_n_dot, new_function_n_infinity):
-    function_hh_n = n * new_function_n_dot[-1] - new_function_n_infinity[-1]
+def _hh_n(n,new_function_n_dot, new_function_n_infinity, new_injectiontime):
+    function_hh_n = ((n * new_function_n_dot[-1] - new_function_n_infinity[-1]) *new_injectiontime[-1])
     hh_n.append(function_hh_n)
 
-def _hh_h (h, new_function_h_dot, new_function_h_infinity):
-    function_hh_h = h * new_function_h_dot[-1] / new_function_h_infinity[-1]
+def _hh_h (h, new_function_h_dot, new_function_h_infinity, new_injectiontime):
+    function_hh_h = ((h * new_function_h_dot[-1] / new_function_h_infinity[-1]) * new_injectiontime[-1])
     hh_h.append(function_hh_h)
 
-
-def fx_ina(gna, hh_m, new_voltage, ena, hh_h, new_time, new_injectiontime):
-    ina = (gna * pow(hh_m, 3.0) * hh_h & (new_voltage[-1] - ena) * new_time[-1] *new_injectiontime[-1])
+def fx_ina(gna, hh_m, new_voltage, ena, hh_h, new_time):
+    ina = (gna * pow(hh_m, 3.0) * hh_h & (new_voltage[-1] - ena) * new_time[-1])
     new_ina.append(ina)
 
 
-def fx_ik(gk, hh_n, new_voltage, ek, new_time,new_injectiontime):
-    ik = (gk * pow(hh_n, 4) * (new_voltage[-1] - ek) * new_time[-1] *new_injectiontime[-1])
+def fx_ik(gk, hh_n, new_voltage, ek, new_time):
+    ik = (gk * pow(hh_n, 4) * (new_voltage[-1] - ek) * new_time[-1])
     new_ik.append(ik)
 
 
-def fx_il(gl, new_voltage, el, new_time, new_injectiontime):
-    il = ((gl * (new_voltage[-1] - el) * new_time[-1]) *new_injectiontime[-1])
+def fx_il(gl, new_voltage, el, new_time):
+    il = ((gl * (new_voltage[-1] - el) * new_time[-1]) )
     new_il.append(il)
 
 
@@ -181,8 +180,6 @@ while initial_time < stop_time:
     if new_time[-1] < 2 or new_time[
         -1] > 12:  # if the last element of new_time is less than 2, or greater than 12 than there is no current
         injectionStartTime = 0
-#        hh_n[-1] = 0
-  #      hh_h[-1] = 0
     elif new_time[-1] > 2:
         injectionStartTime = 1
 
@@ -195,9 +192,9 @@ while initial_time < stop_time:
     elif new_voltage[-1] > voltage_tol:
         new_voltage[-1] = max_voltage
 
-    _hh_m(m, new_function_m_dot, new_function_m_infinity)
-    _hh_n(n, new_function_n_dot, new_function_n_infinity)
-    _hh_h(h, new_function_h_dot, new_function_h_infinity)
+    _hh_m(m, new_function_m_dot, new_function_m_infinity,new_injectiontime)
+    _hh_n(n, new_function_n_dot, new_function_n_infinity, new_injectiontime)
+    _hh_h(h, new_function_h_dot, new_function_h_infinity, new_injectiontime)
 
 
     function_voltage(new_voltage[-1], new_dv_dt_value, time_step, new_injectiontime)  # calls
