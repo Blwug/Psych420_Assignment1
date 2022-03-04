@@ -49,13 +49,13 @@ new_il = [3.0]
 new_not_dv_dt_value = [0.0]
 value = [2.0]
 
-hh_m = [2.0]
+hh_m = [0]
 m = 2.0
 
-hh_n = [4.0]
+hh_n = [0]
 n = 4.0
 
-hh_h = [6.0]
+hh_h = [0]
 h = 6.0
 
 # we need to update the values of either n,h,m or hh_m, hh_n, hh_h so that it actually works
@@ -181,8 +181,12 @@ while initial_time < stop_time:
     if new_time[-1] < 2 or new_time[
         -1] > 12:  # if the last element of new_time is less than 2, or greater than 12 than there is no current
         injectionStartTime = 0
+        hh_m[-1] = 0
+        hh_n[-1] = 0
+        hh_h[-1] = 0
     elif new_time[-1] > 2:
         injectionStartTime = 1
+
     current_injection(injectionStartTime,
                       new_injectiontime)  # updates the current_injection value given the while condition is true
 
