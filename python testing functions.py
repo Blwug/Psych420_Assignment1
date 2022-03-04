@@ -4,13 +4,10 @@ from math import exp
 voltage = 0.0
 initial_time = 0.0
 stop_time = 25
-time_step = .1
-cap = 1.0
-res = 2.0
+time_step = .4
 voltage_tol = 3
 max_voltage = 8
 resting_potential = 0.0
-current = 4.0
 
 ena = 115.0
 gna = 120.0
@@ -163,8 +160,8 @@ while initial_time <= stop_time:
     initial_time += time_step  # updates the time value
     times(initial_time, new_time)
 
-    if new_time[-1] < 2 or new_time[
-        -1] > 12:  # if the last element of new_time is less than 2, or greater than 12 than there is no current
+    if new_time[-1] <= 2 or new_time[
+        -1] >= 12:  # if the last element of new_time is less than 2, or greater than 12 than there is no current
         injectionStartTime = 0
     elif new_time[-1] > 2:
         injectionStartTime = 1
@@ -207,16 +204,14 @@ while initial_time <= stop_time:
 
 
 print("new rate of change  " + str(dv_dt_value))
-#print("injection " +str(new_injectiontime))
-#print("hh_m " +str(hh_m))
-#print("ina  " +str(new_ina))
-
-
-#print ("ss" + str( new_function_n_dot)) ~-0.214
-#print ("bb" + str(new_function_m_dot)) ~-4.817
-#print ("zz" + str(new_function_h_dot)) ~-.095
-#print("voltage" + str(new_voltage)) ~.09
-#print ("wah" + str(new_function_m_infinity)) ~ .053
+print("injection " +str(new_injectiontime))
+print("hh_m " +str(hh_m))
+print("ina  " +str(new_ina))
+print ("ss" + str( new_function_n_dot))
+print ("bb" + str(new_function_m_dot))
+print ("zz" + str(new_function_h_dot))
+print("voltage" + str(new_voltage))
+print ("wah" + str(new_function_m_infinity))
 
 
 plt.plot(new_time, dv_dt_value)
