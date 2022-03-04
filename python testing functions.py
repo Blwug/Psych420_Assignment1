@@ -139,18 +139,18 @@ def _hh_h (h, new_function_h_dot, new_function_h_infinity):
     hh_h.append(function_hh_h)
 
 
-def fx_ina(gna, hh_m, new_voltage, ena, hh_h, new_time):
-    ina = gna * pow(hh_m, 3.0) * hh_h & (new_voltage[-1] - ena) * new_time[-1]
+def fx_ina(gna, hh_m, new_voltage, ena, hh_h, new_time, new_injectiontime):
+    ina = (gna * pow(hh_m, 3.0) * hh_h & (new_voltage[-1] - ena) * new_time[-1] *new_injectiontime[-1])
     new_ina.append(ina)
 
 
-def fx_ik(gk, hh_n, new_voltage, ek, new_time):
-    ik = gk * pow(hh_n, 4) * (new_voltage[-1] - ek) * new_time[-1]
+def fx_ik(gk, hh_n, new_voltage, ek, new_time,new_injectiontime):
+    ik = (gk * pow(hh_n, 4) * (new_voltage[-1] - ek) * new_time[-1] *new_injectiontime[-1])
     new_ik.append(ik)
 
 
-def fx_il(gl, new_voltage, el, new_time):
-    il = gl * (new_voltage[-1] - el) * new_time[-1]
+def fx_il(gl, new_voltage, el, new_time, new_injectiontime):
+    il = ((gl * (new_voltage[-1] - el) * new_time[-1]) *new_injectiontime[-1])
     new_il.append(il)
 
 
@@ -181,9 +181,8 @@ while initial_time < stop_time:
     if new_time[-1] < 2 or new_time[
         -1] > 12:  # if the last element of new_time is less than 2, or greater than 12 than there is no current
         injectionStartTime = 0
-        hh_m[-1] = 0
-        hh_n[-1] = 0
-        hh_h[-1] = 0
+#        hh_n[-1] = 0
+  #      hh_h[-1] = 0
     elif new_time[-1] > 2:
         injectionStartTime = 1
 
@@ -205,10 +204,10 @@ while initial_time < stop_time:
 
     not_dv_dt(new_ina[-1], new_ik[-1], new_il[-1], new_injectiontime[-1])  # new_injectiontime
 
-#print("new rate of change " + str(new_dv_dt_value))
-#print("new time  " + str(new_time))
-#print("new voltage " + str(new_voltage))
-#print("new injection current  " + str(new_not_dv_dt_value))
+print("new rate of change " + str(new_dv_dt_value))
+print("new time  " + str(new_time))
+print("new voltage " + str(new_voltage))
+print("new injection current  " + str(new_not_dv_dt_value))
 print("hh_m " +str(hh_m))
 print("hh_n" +str(hh_n))
 print("hh_h" +str(hh_h))
