@@ -57,8 +57,8 @@ def function_voltage(rate_of_change, time_step,new_injectiontime):  # injectiont
     new_voltage.append(function_voltage)
 
 def rate_of_change(new_ina, new_ik, new_il, new_injectiontime):
-    function_not_dv_dt = new_injectiontime - (new_ina + new_ik + new_il)
-    dv_dt_value.append(function_not_dv_dt)
+    function_dv_dt = new_injectiontime - (new_ina + new_ik + new_il)
+    dv_dt_value.append(function_dv_dt)
 
 def alpha_n(volts):  # general formula, we'll specify the value within the update function
     function_alpha_n = (0.1 - (0.01 * volts / (exp(1 - (0.1 * volts)) - 1)))
@@ -159,15 +159,8 @@ while initial_time <= stop_time:
 
     initial_time += time_step  # updates the time value
     times(initial_time, new_time)
-
-    if new_time[-1] <= 2 or new_time[
-        -1] >= 12:  # if the last element of new_time is less than 2, or greater than 12 than there is no current
-        injectionStartTime = 0
-    elif new_time[-1] > 2:
-        injectionStartTime = 1
-
     current_injection(injectionStartTime,
-                      new_injectiontime)  # updates the current_injection value given the while condition is true
+                      new_injectiontime)
 
 
     alpha_n(new_voltage[-1])  # volts = new_voltage[-1] because we are redefining that within this statement
