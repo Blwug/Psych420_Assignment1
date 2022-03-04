@@ -88,8 +88,8 @@ def beta_h(volts):
     function_beta_h = 1 / (exp(3.0 - (volts * 0.1)) + 1)
     new_beta_h.append(function_beta_h)
 
-#we redefine m,n,h within the update function that uses the new value given from hh_m, hh_n, hh_h
-def m_dot(hh_alpha_m, hh_beta_m, m):
+
+def m_dot(hh_alpha_m, hh_beta_m, m): # m = hh_m
     function_m_dot = (hh_alpha_m * (1 - m)) - (hh_beta_m * m)
     new_function_m_dot.append(function_m_dot)
 
@@ -151,7 +151,7 @@ def times(initial_time, new_time):  # updates the time value
     new_time.append(initial_time)
 
 
-def current_injection(injectionStartTime, new_injectiontime):
+def current_injection(injectionStartTime, new_injectiontime): #update line 154
     new_injectiontime.append(injectionStartTime)
 
 
@@ -169,11 +169,6 @@ while initial_time <= stop_time:
     current_injection(injectionStartTime,
                       new_injectiontime)  # updates the current_injection value given the while condition is true
 
-    if new_voltage[-1] >= max_voltage or new_time[-1] < 2:
-        new_voltage[-1] = resting_potential
-
-    elif new_voltage[-1] > voltage_tol:
-        new_voltage[-1] = max_voltage
 
     alpha_n(new_voltage[-1])  # volts = new_voltage[-1] because we are redefining that within this statement
     alpha_m(new_voltage[-1])
