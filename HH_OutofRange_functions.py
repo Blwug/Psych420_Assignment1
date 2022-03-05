@@ -16,7 +16,7 @@ gk = 36.0
 el = 10.6
 gl = 0.3
 
-injectionCurrent = 0.0
+injectionCurrent = 0
 injectionStartTime = 0.0
 injectionEndTime = 6.0
 function_injection_value = []
@@ -200,16 +200,20 @@ while initial_time <= stop_time:
 
 
 #print("new rate of change  " + str(dv_dt_value))
-#print("injection " +str(new_injectiontime))
+
 #print("hh_m " +str(hh_m))
 #print("ina  " +str(new_ina))
-#print ("ss" + str( new_function_n_dot))
-#print ("bb" + str(new_function_m_dot))
-#print ("zz" + str(new_function_h_dot))
-#print("voltage" + str(new_voltage))
-#print ("wah" + str(new_function_m_infinity))
+#print ("n_dot" + str( new_function_n_dot))
+#print ("m_dot" + str(new_function_m_dot))
+#print ("h_dot" + str(new_function_h_dot))
+#print ("m_infinity" + str(new_function_m_infinity))
+#print ("times" + str(new_time))
+
+print("voltage" + str(new_voltage))
+print("rate of change " + str(dv_dt_value))
+print ("time_step " +str(time_step))
+print("injection" +str(new_injectiontime))
 print ("times" + str(new_time))
-print("injection " +str(new_injectiontime))
 
 
 plt.plot(new_time, dv_dt_value)
