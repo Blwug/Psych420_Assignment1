@@ -198,18 +198,14 @@ while initial_time <= stop_time:
 
     rate_of_change(new_ina[-1], new_ik[-1], new_il[-1], new_injectiontime[-1])  # new_injectiontime
 
-
-#print("new rate of change  " + str(dv_dt_value))
-#print("injection " +str(new_injectiontime))
-#print("hh_m " +str(hh_m))
-#print("ina  " +str(new_ina))
-#print ("ss" + str( new_function_n_dot))
-#print ("bb" + str(new_function_m_dot))
-#print ("zz" + str(new_function_h_dot))
-#print("voltage" + str(new_voltage))
-#print ("wah" + str(new_function_m_infinity))
-print ("times" + str(new_time))
-print("injection " +str(new_injectiontime))
+print("injection_time" +str(new_injectiontime))
+print ("ina " +str(new_ina))
+print("ik " +str(new_ik))
+print("il" + str(new_il))
+print("product " +str(dv_dt_value))
+print("voltage " +str(new_voltage))
+#for the second value, it's -454.18
+#both voltage and injection time returns 0
 
 
 plt.plot(new_time, dv_dt_value)
