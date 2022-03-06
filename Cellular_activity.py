@@ -36,14 +36,13 @@ def hidden_layer(inner_layer, weights, target, prediction, l_rate, bias):
             new_weights.append(new_w)
         return new_weights, bias #returns a tuple
 
-    else:
-
-        if prediction < target:
+    elif prediction < target:
             new_weights = []
             for x, w in zip(inner_layer, weights):
                 new_w = w + l_rate * (target + prediction) * x  # (target - prediction) is error
                 new_weights.append(new_w)
             return new_weights, bias  # returns a tuple
+
 
 for epoch in range(200): #epoch is the number of iterations
     for x, y in zip(inner_layer, targets): #pairs the values being passed in every iteration so inner_layer[0],targets[0]
