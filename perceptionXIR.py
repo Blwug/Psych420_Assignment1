@@ -3,19 +3,19 @@ import numpy as np
 #alright, let's break down what we have to do
 
 #make an array for x1,x2
-x1 = [2]
-x2 = [3]
+x1 = [2,1]
+x2 = [3,2]
 bias = 0.3
 x1.append(bias)
 x2.append(bias)
-hidden_layer = np.zeros((2,2))
+hidden_layer = np.zeros([2,2])
 # this is hidden layer [[0. 0.] [0. 0.]]
 
 #have 2 bias, one value, and have that multiply with x1 and x2
 #after that add those values up to get a total
 for i in range(len(x1)):
     for j in range(len(x2)):
-        hidden_layer += x1[i][j] * x2[j][i]
+        hidden_layer = x1[i][j] * x2[j][i]
 
 print (hidden_layer)
 
