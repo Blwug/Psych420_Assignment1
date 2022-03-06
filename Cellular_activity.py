@@ -23,7 +23,7 @@ def get_prediction(inner_layer, weights, bias):
 
 
 def cross_entropy(target, pred):
-    return -(target * np.log10(pred) + (1 - target) * (np.log10(1 - pred))) #individual loss of the first value
+    return -(target * np.log10(pred) + (1 - target) * (np.log10(1 - pred))) #difference of target and prediction
 
 
 def hidden_layer(inner_layer, weights, target, prediction, l_rate, bias):
