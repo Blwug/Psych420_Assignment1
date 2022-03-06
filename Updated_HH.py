@@ -1,5 +1,5 @@
 from math import exp
-import matplotlib
+import matplotlib as plt
 
 start_t = 0.0
 time_step = 0.4
@@ -92,12 +92,15 @@ def run_sim():
 
         voltages.append(init_v)
 
-    def graph():
-        plt.plot(new_times, voltages)
-        plt.xlabel ('times')
-        plt.ylabel ('voltage')
-        plt.show()
+#def graph():
+  #  plt.plot(new_times, voltages)
+    #plt.xlabel ('times')
+    #plt.ylabel ('voltage')
+    #plt.show()
 
 
-between(0.02, 450.0, 50.0, 300.0, 7.0)
-plot_graph()
+between(0.02, 450.0, 50.0, 300.0)
+print(voltages)
+print(new_times)
+
+#graph()
