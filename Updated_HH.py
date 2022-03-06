@@ -6,8 +6,8 @@ time_step = 0.4
 end_t = 10.0
 init_v = 0.0
 
-new_times = []
-voltages = []
+new_times = [start_t]
+voltages = [init_v]
 
 ena = 115.0
 gna = 120.0
@@ -72,7 +72,7 @@ def update_values(old_value, rate_of_change, time_step): #updates the value of t
 
 def between(x, injection_start_time, injection_stop_time, injection_current):
     if (x >= injection_start_time and x<= injection_stop_time):
-        return injection_current
+        return  x
     else:
         return 0
 
@@ -91,6 +91,7 @@ def run_sim():
         init_v = update_values(init_v, dvdt(init_v, cur_injection, hh_m, hh_n, hh_h), time_step)
 
         voltages.append(init_v)
+        new_times.append(start_t)
 
 #def graph():
   #  plt.plot(new_times, voltages)
