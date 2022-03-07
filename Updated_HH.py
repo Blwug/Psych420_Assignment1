@@ -45,23 +45,23 @@ def beta_h(volts):
 
 #derivative function
 
-def m_dot(volts, m):
-    return (alpha_m(volts) * (1 - m)) - (beta_m(volts) * m)
+def m_dot(init_v, m):
+    return (alpha_m(init_v) * (1 - m)) - (beta_m(init_v) * m)
 
-def n_dot(volts, n):
-    return (alpha_n(volts) * (1 - n)) - (beta_n(volts) * n)
+def n_dot(init_v, n):
+    return (alpha_n(init_v) * (1 - n)) - (beta_n(init_v) * n)
 
-def h_dot(volts, h):
-    return (alpha_h(volts) * (1 - h)) - (beta_h(volts) * h)
+def h_dot(init_v, h):
+    return (alpha_h(init_v) * (1 - h)) - (beta_h(init_v) * h)
 
-def m_infinity(volts):
-    return alpha_m(volts) / (alpha_m(volts) + beta_m(volts))
+def m_infinity(init_v):
+    return alpha_m(init_v) / (alpha_m(init_v) + beta_m(init_v))
 
-def n_infinity(volts):
-    return alpha_n(volts) / (alpha_n(volts) + beta_n(volts))
+def n_infinity(init_v):
+    return alpha_n(init_v) / (alpha_n(init_v) + beta_n(init_v))
 
-def h_infinity(volts):
-    return alpha_h(volts) / (alpha_h(volts) + beta_h(volts))
+def h_infinity(init_v):
+    return alpha_h(init_v) / (alpha_h(init_v) + beta_h(init_v))
 
 def dvdt (cur_voltage, injection_current, hh_m, hh_n, hh_h):
     ina = gna * pow(hh_m, 3.0) * hh_h * (cur_voltage - ena)
@@ -81,18 +81,18 @@ def between(injection_current, injection_start_time, injection_stop_time):
 
 def run_sim():
 
-    m = m_infinity(init_v)
-    h = n_infinity(init_v)
-    h = h_infinity(init_v)
+    m_sim = m_infinity(init_v)
+    n_sim = n_infinity(init_v)
+    h_sim = h_infinity(init_v)
 
     while start_t <= end_t:
         start_t += time_step
         new_times.append(start_t)
         between(injection_current, injection_start_time, injection_end_time)
 
-        m = update_values (m, m_dot(init_v, m_sim), time_step)
-        n = update_values(n, n_dot(init_v, n_sim), time_step)
-        h = update_values(h, h_dot(init_v, h_sim), time_step)
+        m_sim = update_values (m_sim, m_dot(init_v, m_sim), time_step)
+        n_sim = update_values(n_sim, n_dot(init_v, n_sim), time_step)
+        h_sim = update_values(h_sim, h_dot(init_v, h_sim), time_step)
         init_v = update_values(init_v, dvdt(init_v, injection_current, hh_m, hh_n, hh_h), time_step)
 
 
