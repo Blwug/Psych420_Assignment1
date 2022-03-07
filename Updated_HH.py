@@ -17,6 +17,9 @@ el = 10.6
 gl = 0.3
 
 injection_current  = 0.0
+injection_start_time = 0.0
+injection_end_time = 6.0
+
 delta_time = 0.0
 
 times = []
@@ -86,26 +89,20 @@ def run_sim():
         start_t += time_step
         new_times.append(start_t)
 
-        alpha_n(init_v)
-        alpha_m(init_v)
-        alpha_h(init_v)
-        beta_n(init_v)
-        beta_m(init_v)
-        beta_h(init_v)
-
         m_sim = update_values (m_sim, m_dot(init_v, m_sim), time_step)
         n_sim = update_values(n_sim, n_dot(init_v, n_sim), time_step)
         h_sim = update_values(h_sim, h_dot(init_v, h_sim), time_step)
         init_v = update_values(init_v, dvdt(init_v, injection_current, hh_m, hh_n, hh_h), time_step)
+        between(injection_current, injection_start_time, injection_end_time)
 
         voltages.append(init_v)
         new_times.append(start_t)
 
-#def graph():
-  #  plt.plot(new_times, voltages)
-    #plt.xlabel ('times')
-    #plt.ylabel ('voltage')
-    #plt.show()
+def graph():
+    plt.plot(new_times, voltages)
+    plt.xlabel ('times')
+    plt.ylabel ('voltage')
+    plt.show()
 
 
 
