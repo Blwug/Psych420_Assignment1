@@ -10,15 +10,14 @@ targets = np.array([1, 1, 0])  #
 weights = np.array([0.4, 0.2, 0.4])
 new = [0]
 runs = []
-bias = 0.5
+bias = 1
 l_rate = 0.1  # learning rate
-goal = [0.27209124946479446]
+goal = [0.2590329139118882]
 iteration = 0
 instance = [iteration]
 
 def sigmoid(w_sum):
     return 1 / (1 + np.exp(-w_sum))  # 1/1 + e**-weighted sum
-
 
 
 def get_prediction(inner_layer, weights, bias):
@@ -27,7 +26,6 @@ def get_prediction(inner_layer, weights, bias):
 
 def cross_entropy(target, pred):
     return -(target * np.log10(pred) + (1 - target) * (np.log10(1 - pred)))  # difference of target and prediction
-
 
 def hidden_layer(inner_layer, weights, target, prediction, l_rate, bias):
     new_weights = []
