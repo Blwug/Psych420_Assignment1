@@ -16,7 +16,7 @@ gk = 36.0
 el = 10.6
 gl = 0.3
 
-injection_time  = 0.0
+injection_current  = 0.0
 delta_time = 0.0
 
 times = []
@@ -60,19 +60,19 @@ def n_infinity(volts):
 def h_infinity(volts):
     return alpha_h(volts) / (alpha_h(volts) + beta_h(volts))
 
-def dvdt (cur_voltage, cur_injection, hh_m, hh_n, hh_h):
+def dvdt (cur_voltage, injection_current, hh_m, hh_n, hh_h):
     ina = gna * pow(hh_m, 3.0) * hh_h * (cur_voltage - ena)
     ik = gk * pow(hh_n, 4.0) * (cur_voltage - ek)
-    il = gl * (cur_voltage - el)
+    il = gl * (injection_current - el)
 
-    return cur_injection - (ina + ik + il)
+    return injection_current - (ina + ik + il)
 
 def update_values(old_value, rate_of_change, time_step): #updates the value of the previous value
     return ((rate_of_change &time_step) + old_value)
 
-def between(x, injection_start_time, injection_stop_time, injection_current):
-    if (x >= injection_start_time and x<= injection_stop_time):
-        return  x
+def between(injection_current, injection_start_time, injection_stop_time):
+    if (injection_current >= injection_start_time and injection_current<= injection_stop_time):
+        return  injection_current
     else:
         return 0
 
@@ -85,10 +85,18 @@ def run_sim():
     while start_t <= end_t:
         start_t += time_step
         new_times.append(start_t)
+
+        alpha_n(init_v)
+        alpha_m(init_v)
+        alpha_h(init_v)
+        beta_n(init_v)
+        beta_m(init_v)
+        beta_h(init_v)
+
         m_sim = update_values (m_sim, m_dot(init_v, m_sim), time_step)
         n_sim = update_values(n_sim, n_dot(init_v, n_sim), time_step)
         h_sim = update_values(h_sim, h_dot(init_v, h_sim), time_step)
-        init_v = update_values(init_v, dvdt(init_v, cur_injection, hh_m, hh_n, hh_h), time_step)
+        init_v = update_values(init_v, dvdt(init_v, injection_current, hh_m, hh_n, hh_h), time_step)
 
         voltages.append(init_v)
         new_times.append(start_t)
@@ -100,7 +108,7 @@ def run_sim():
     #plt.show()
 
 
-between(0.02, 450.0, 50.0, 300.0)
+
 print(voltages)
 print(new_times)
 
