@@ -81,18 +81,18 @@ def between(injection_current, injection_start_time, injection_stop_time):
 
 def run_sim():
 
-    m_sim = m_infinity(init_v)
-    n_sim = n_infinity(init_v)
-    h_sim = h_infinity(init_v)
+    m = m_infinity(init_v)
+    h = n_infinity(init_v)
+    h = h_infinity(init_v)
 
     while start_t <= end_t:
         start_t += time_step
         new_times.append(start_t)
         between(injection_current, injection_start_time, injection_end_time)
 
-        m_sim = update_values (m_sim, m_dot(init_v, m_sim), time_step)
-        n_sim = update_values(n_sim, n_dot(init_v, n_sim), time_step)
-        h_sim = update_values(h_sim, h_dot(init_v, h_sim), time_step)
+        m = update_values (m, m_dot(init_v, m_sim), time_step)
+        n = update_values(n, n_dot(init_v, n_sim), time_step)
+        h = update_values(h, h_dot(init_v, h_sim), time_step)
         init_v = update_values(init_v, dvdt(init_v, injection_current, hh_m, hh_n, hh_h), time_step)
 
 
