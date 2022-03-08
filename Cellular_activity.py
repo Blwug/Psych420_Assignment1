@@ -27,7 +27,13 @@ def cross_entropy(target, pred):
 product = np.dot(weights, inner_layer)
 
 a = sigmoid(product)
+b = get_prediction(inner_layer, weights, bias)
+
+c = cross_entropy(targets, b)
+
 
 print (a)
+print (b)
+print(c)
 
 
